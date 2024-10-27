@@ -22,6 +22,9 @@ class Config(TypedDict):
 CONFIG_FILE_NAME = "config.toml"
 
 DEFAULT_TRANSFORMERS: Transformers = {
+    "to_camel_case": lambda s: re.sub(
+        r"(?:^|[\s_-])+(\w)", lambda m: m.group(1).upper(), s
+    ),
     "to_kebab_case": lambda s: re.sub(r"[\s_]+", "-", s.lower()),
     "to_snake_case": lambda s: re.sub(r"[\s-]+", "_", s.lower()),
 }

@@ -64,6 +64,18 @@ class TestVariables(unittest.TestCase):
 
 
 class TestDefaultTransformers(unittest.TestCase):
+    def test_to_camel_case(self):
+        checks = (
+            ("Hello World", "HelloWorld"),
+            ("hello_world", "HelloWorld"),
+            ("hello-world", "HelloWorld"),
+            ("HelloWorld", "HelloWorld"),
+        )
+        transform = tombot.DEFAULT_TRANSFORMERS["to_camel_case"]
+        for string, expected in checks:
+            with self.subTest(string=string):
+                self.assertEqual(transform(string), expected)
+
     def test_to_kebab_case(self):
         checks = (
             ("Hello World", "hello-world"),
